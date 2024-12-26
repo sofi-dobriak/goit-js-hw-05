@@ -354,8 +354,8 @@ const logProduct2 = product => console.log(product);
 
 const logTotalPrice2 = product => console.log(product.price * product.quantity);
 
-// createProduct({ name: '🍎', price: 30, quantity: 3 }, logProduct);
-// createProduct({ name: '🍋', price: 20, quantity: 5 }, logTotalPrice);
+createProduct({ name: '🍎', price: 30, quantity: 3 }, logProduct2);
+createProduct({ name: '🍋', price: 20, quantity: 5 }, logTotalPrice2);
 
 //Task 15
 /*Виконайте рефакторинг коду, використовуючи стрілочні функції.*/
@@ -396,13 +396,13 @@ const handleSuccess = message => console.log(`✅ Success! ${message}`);
 
 const handleError = message => console.log(`❌ Error! ${message}`);
 
-// account.withdraw(2000, handleSuccess, handleError);
-// account.withdraw(600, handleSuccess, handleError);
-// account.withdraw(300, handleSuccess, handleError);
-// account.deposit(1700, handleSuccess, handleError);
-// account.deposit(0, handleSuccess, handleError);
-// account.deposit(-600, handleSuccess, handleError);
-// account.deposit(600, handleSuccess, handleError);
+account.withdraw(2000, handleSuccess, handleError);
+account.withdraw(600, handleSuccess, handleError);
+account.withdraw(300, handleSuccess, handleError);
+account.deposit(1700, handleSuccess, handleError);
+account.deposit(0, handleSuccess, handleError);
+account.deposit(-600, handleSuccess, handleError);
+account.deposit(600, handleSuccess, handleError);
 
 //Task 16
 /*Виконайте рефакторинг коду, використовуючи стрілочні функції.*/
@@ -418,31 +418,31 @@ const each = (array, callback) => {
     return newArr;
 };
 
-// console.log(
-//     each([64, 49, 36, 25, 16], value => {
-//         return value * 2;
-//     })
-// );
-// console.log(
-//     each([64, 49, 36, 25, 16], value => {
-//         return value - 10;
-//     })
-// );
-// console.log(
-//     each([64, 49, 36, 25, 16], value => {
-//         return Math.sqrt(value);
-//     })
-// );
-// console.log(
-//     each([1.5, 2.1, 16.4, 9.7, 11.3], value => {
-//         return Math.ceil(value);
-//     })
-// );
-// console.log(
-//     each([1.5, 2.1, 16.4, 9.7, 11.3], value => {
-//         return Math.floor(value);
-//     })
-// );
+console.log(
+    each([64, 49, 36, 25, 16], value => {
+        return value * 2;
+    })
+);
+console.log(
+    each([64, 49, 36, 25, 16], value => {
+        return value - 10;
+    })
+);
+console.log(
+    each([64, 49, 36, 25, 16], value => {
+        return Math.sqrt(value);
+    })
+);
+console.log(
+    each([1.5, 2.1, 16.4, 9.7, 11.3], value => {
+        return Math.ceil(value);
+    })
+);
+console.log(
+    each([1.5, 2.1, 16.4, 9.7, 11.3], value => {
+        return Math.floor(value);
+    })
+);
 
 //Task 17
 /*Виконайте рефакторинг коду, використовуючи метод forEach і стрілочні функції.*/
@@ -456,8 +456,8 @@ const logItems = items => {
     });
 };
 
-// logItems(['Mango', 'Poly', 'Ajax']);
-// logItems(['🍎', '🍇', '🍑', '🍌', '🍋']);
+logItems(['Mango', 'Poly', 'Ajax']);
+logItems(['🍎', '🍇', '🍑', '🍌', '🍋']);
 
 //Task 18
 /*Виконайте рефакторинг коду, використовуючи метод forEach і стрілочні функції.*/
@@ -472,8 +472,8 @@ const printContactsInfo = ({ names, phones }) => {
     //     console.log(`${nameList[i]}: ${phoneList[i]}`);
     // }
 
-    nameList.forEach(index => {
-        console.log(`${nameList[index]}: ${phoneList[index]}`);
+    nameList.forEach((name, index) => {
+        console.log(`${name}: ${phoneList[index]}`);
     });
 };
 
@@ -488,16 +488,16 @@ printContactsInfo({
 console.log(' ');
 console.log('Task #19');
 
-function calсulateAverage(...args) {
+const calculateAverage = (...args) => {
     let total = 0;
 
-    args.forEach(index => {
-        total += args[index];
+    args.forEach(number => {
+        total += number;
     });
 
     return total / args.length;
-}
+};
 
-// console.log(calсulateAverage(1, 2, 3, 4)); // 2.5
-// console.log(calсulateAverage(14, 8, 2)); // 8
-// console.log(calсulateAverage(27, 43, 2, 8, 36)); // 23.2
+console.log(calculateAverage(1, 2, 3, 4)); // 2.5
+console.log(calculateAverage(14, 8, 2)); // 8
+console.log(calculateAverage(27, 43, 2, 8, 36)); // 23.2
