@@ -256,7 +256,7 @@ function getBooksByGenre(books, userGenre) {
 
 //------------------------------------------------------------------------------------
 
-// Знайти всі книги, видані після 2000 року.
+// Знайти всі книги, видані після 1950 року.
 
 function getBooksByAfterYear(books, userYear) {
     return books.filter(book => book.year > userYear);
@@ -273,6 +273,7 @@ function getBooksByAuthor(books, userAuthor) {
     return books.filter(book => book.author === userAuthor);
 }
 
+// console.table(getBooksByAuthor(books, 'Harper Lee'));
 // console.table(getBooksByAuthor(books, 'J.R.R. Tolkien'));
 
 //------------------------------------------------------------------------------------
@@ -527,11 +528,11 @@ function isAnyBookByBeforeYear(books, userYear) {
 
 // Чи є в масиві хоча б одна книга, що містить слово 'and' у назві?
 
-function isAnyBookByWord(books, userWord) {
+function isAnyBookHasWord(books, userWord) {
     return books.some(book => book.title.includes(userWord));
 }
 
-// console.log(isAnyBookByWord(books, 'and'));
+// console.log(isAnyBookHasWord(books, 'and'));
 
 //------------------------------------------------------------------------------------
 
@@ -553,164 +554,538 @@ function isAnyBookByGenreAndRatingMoreThan(books, userGenre, userRating) {
 //!==================================================================================
 
 // Чи всі книги в масиві мають рейтинг 4.5 і вище?
+// Чи всі книги в масиві мають рейтинг вище 4.0?
+
+function isAllBooksByRatinMoreThan(books, userRating) {
+    return books.every(book => book.rating >= userRating);
+}
+
+// console.log(isAnyBookByGenreAndRatingMoreThan(books, 4.5));
+// console.log(isAnyBookByGenreAndRatingMoreThan(books, 4.0));
 
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві коштують менше 20 доларів?
 
+function isAllBooksByPriceLessThan(books, userPrice) {
+    return books.every(book => book.price < userPrice);
+}
+
+// console.log(isAllBooksByPriceLessThan(books, 20));
+
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві видані після 1950 року?
 
+function isAllBookByAfterYear(books, userYear) {
+    return books.every(book => book.year > userYear);
+}
+
+// console.log(isAllBookByAfterYear(books, 1950));
+
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві є жанру 'Fiction'?
+// Чи всі книги в масиві є жанру 'Adventure'?
+
+function isAllBooksByGenre(books, userGenre) {
+    return books.every(book => book.genre === userGenre);
+}
+
+// console.log(isAllBooksByGenre(books, 'Fiction'));
+// console.log(isAllBooksByGenre(books, 'Adventure'));
 
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві мають автора з ім'ям, що починається на 'J'?
 
+function isAllBookByFirstLetterAuthorName(books, firstLetter) {
+    return books.every(book => book.author[0] === firstLetter);
+}
+
+// console.log(isAllBookByFirstLetterAuthorName(books, 'J'));
+
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві є жанру 'Romance' з ціною меншою ніж 15 доларів?
+
+function isAllBooksByGenreAndPriceLessThan(books, userGenre, userPrice) {
+    const result = books.every(book => {
+        const genre = book.genre === userGenre;
+        const price = book.price < userPrice;
+
+        return genre && price;
+    });
+
+    return result;
+}
+
+// console.log(isAllBooksByGenreAndPriceLessThan(books, 'Romance', 15));
 
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві видані до 2000 року?
 
+function isAllBooksBeforeYear(books, userYear) {
+    return books.every(book => book.year < userYear);
+}
+
+// console.log(isAllBooksBeforeYear(books, 2020));
+
 //------------------------------------------------------------------------------------
 
 // Чи всі книги в масиві мають слово 'the' у назві?
 
-//------------------------------------------------------------------------------------
+function isAllBookHasWord(books, userWord) {
+    return books.every(book => book.title.includes(userWord));
+}
 
-// Чи всі книги в масиві мають рейтинг вище 4.0?
-
-//------------------------------------------------------------------------------------
-
-// Чи всі книги в масиві є жанру 'Adventure'?
+// console.log(isAllBookHasWord(books, 'the'));
 
 // //!==================================================================================
 
 // Отримати масив назв всіх книжок.
 
+function getAllTitles(books) {
+    const titles = books.map(book => book.title);
+    return titles;
+}
+
+// console.table(getAllTitles(books));
+
 //------------------------------------------------------------------------------------
 
 // Отримати масив авторів всіх книжок.
+
+function getAllAuthors(books) {
+    const authors = books.map(book => book.author);
+    return authors;
+}
+
+// console.table(getAllAuthors(books));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, які містять лише назву та автора кожної книжки.
 
+function getTitleAndAuthor(books) {
+    const titleAuthor = books.map(book => {
+        return {
+            title: book.title,
+            author: book.author,
+        };
+    });
+
+    return titleAuthor;
+}
+
+// console.table(getTitleAndAuthor(books));
+
 //------------------------------------------------------------------------------------
 
 // Створити масив цін всіх книжок з подвоєною вартістю.
+
+function getBooksWithІncreasedPrice(books, increaseValue) {
+    const doublePrice = books.map(book => {
+        const copy = { ...book };
+        copy.price *= increaseValue;
+
+        return copy;
+    });
+
+    return doublePrice;
+}
+
+// console.table(getBooksWithІncreasedPrice(books, 2));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив років видання всіх книжок з доданими 5 роками до кожного.
 
+function getBooksWithAddYear(books, years) {
+    const addYear = books.map(book => {
+        const copy = { ...book };
+        copy.year += years;
+
+        return copy;
+    });
+
+    return addYear;
+}
+
+// console.table(getBooksWithAddYear(books, 5));
+
 //------------------------------------------------------------------------------------
 
-// Створити масив об'єктів, які містять назву книжки та її рейтинг у відсотках (помножений на 10).
+// Створити масив об'єктів, які містять назву книжки та її рейтинг у відсотках.
+
+function getBooksTitleAndPercentRating(books, maxRating) {
+    const titleRating = books.map(book => {
+        const copy = { ...book };
+
+        return {
+            title: copy.title,
+            rating: Number(((copy.rating / maxRating) * 100).toFixed(0)),
+        };
+    });
+
+    return titleRating;
+}
+
+// console.table(getBooksTitleAndPercentRating(books, 5));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, де назва книжки буде в верхньому регістрі.
 
+function getUpperTitle(books) {
+    const upperTitle = books.map(book => {
+        const copy = { ...book };
+        copy.title = copy.title.toUpperCase();
+
+        return copy;
+    });
+
+    return upperTitle;
+}
+
+// console.table(getUpperTitle(books));
+
 //------------------------------------------------------------------------------------
 
 // Створити масив рядків, що містять інформацію про кожну книжку в форматі "назва - автор".
+
+function getTitleAuthorArray(books) {
+    const titleAuthorArray = books.map(book => {
+        const copy = { ...book };
+
+        return `${copy.title} — ${copy.author}`;
+    });
+
+    return titleAuthorArray;
+}
+
+// console.log(getTitleAuthorArray(books));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, де кожна книжка буде мати нове поле discountPrice, що дорівнює ціні зі знижкою 10%.
 
+function getDiscountField(books, discount) {
+    const discountField = books.map(book => {
+        const copy = { ...book };
+        copy.discountPrice = Number((copy.price * discount).toFixed(0));
+
+        return copy;
+    });
+
+    return discountField;
+}
+
+// console.table(getDiscountField(books, 0.9));
+
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, що містять назву книжки та її ціну з доданим податком 15%.
 
+function getTitleAndPriceWithTax(books, tax) {
+    const addTax = books.map(book => {
+        const copy = { ...book };
+        copy.price = Number((copy.price * tax).toFixed(2));
+
+        return {
+            title: copy.title,
+            price: copy.price,
+        };
+    });
+
+    return addTax;
+}
+
+// console.table(getTitleAndPriceWithTax(books, 1.15));
+
 //------------------------------------------------------------------------------------
 
-// Створити масив назв книжок, які видані після 2000 року.
+// Створити масив назв книжок, які видані після 1950 року.
+
+function getBooksTitlesAfterYear(books, userYear) {
+    const titles = books.filter(book => book.year > userYear).map(book => book.title);
+
+    return titles;
+}
+
+// console.table(getBooksTitlesAfterYear(books, 1950));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, де кожна книжка буде мати нове поле isClassic, що дорівнює true, якщо книжка видана до 1950 року.
 
+function getBookAfterYearWithIsClassic(books, userYear) {
+    const newBooks = books.map(book => ({
+        ...book,
+        isClassic: book.year < userYear,
+    }));
+
+    return newBooks;
+}
+
+// console.table(getBookAfterYearWithIsClassic(books, 1950));
+
 //------------------------------------------------------------------------------------
 
 // Отримати масив жанрів всіх книжок у верхньому регістрі.
+
+function getUpperGenre(books) {
+    const upperGenre = books.map(book => {
+        const copy = { ...book };
+        return copy.genre.toUpperCase();
+    });
+
+    return upperGenre;
+}
+
+// console.table(getUpperGenre(books));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив назв книжок, де всі слова в назві починаються з великої літери.
 
+function getTitleUpperEachWords(books) {
+    return books.filter(book => {
+        const words = book.title.split(' ');
+        return words.every(word => word.charAt(0) === word.charAt(0).toUpperCase());
+    });
+}
+
+// console.table(getTitleUpperEachWords(books));
+
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, що містять лише автора та рік видання кожної книжки.
+
+function getAuthorAndYear(books) {
+    return books.map(book => {
+        const copy = { ...book };
+
+        return {
+            author: copy.author,
+            year: copy.year,
+        };
+    });
+}
+
+// console.table(getAuthorAndYear(books));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив цін книжок, конвертованих з доларів у євро (курс 1 долар = 0.85 євро).
 
+function getEuroPrice(books, courseEuro) {
+    return books.map(book => {
+        const copy = { ...book };
+
+        copy.price = Number((copy.price * courseEuro).toFixed(2));
+        return copy;
+    });
+}
+
+// console.table(getEuroPrice(books, 0.85));
+
 //------------------------------------------------------------------------------------
 
 // Створити масив назв книжок з доданим в кінці рядком "(Special Edition)".
+
+function addString(books, string) {
+    return books.map(book => {
+        const copy = { ...book };
+        return copy.title + string;
+    });
+}
+
+// console.log(addString(books, ' (Special Edition)'));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, де кожна книжка буде мати нове поле shortTitle, що містить тільки перше слово з назви.
 
+function cutTitle(books) {
+    return books.map(book => {
+        const copy = { ...book };
+        copy.shortTitle = copy.title.split(' ')[0];
+
+        return copy;
+    });
+}
+
+// console.table(cutTitle(books));
+
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, де кожна книжка буде мати нове поле description, що містить рядок "Ця книга від автора [author] була видана у [year] році".
+
+function addDescription(books) {
+    return books.map(book => {
+        const copy = { ...book };
+        copy.description = `Ця книга від автора ${copy.author} була видана у ${copy.year} році`;
+
+        return copy;
+    });
+}
+// console.table(addDescription(books));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив об'єктів, що містять лише назву та жанр кожної книжки, де жанр записаний у нижньому регістрі.
 
+function getTitleAndLowerGenre(books) {
+    return books.map(book => {
+        const copy = { ...book };
+        copy.genre = copy.genre.toLowerCase();
+
+        return {
+            title: copy.title,
+            genre: copy.genre,
+        };
+    });
+}
+
+// console.table(getTitleAndLowerGenre(books));
+
 //!==================================================================================
 
 // Відсортувати книги за роком видання від найдавнішого до найновішого.
+
+function sortFromOldYear(books) {
+    return books.toSorted((a, b) => a.year - b.year);
+}
+
+// console.table(sortFromOldYear(books));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за ціною від найнижчої до найвищої.
 
+function sortByPriceFromSmall(books) {
+    return books.toSorted((a, b) => a.price - b.price);
+}
+
+// console.table(sortByPriceFromSmall(books));
+
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за рейтингом від найнижчого до найвищого.
+
+function sortByRatingFromSmall(books) {
+    return books.toSorted((a, b) => a.rating - b.rating);
+}
+
+// console.table(sortByRatingFromSmall(books));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за назвою у алфавітному порядку (від А до Я).
 
+function sortByTitleAlphabet(books) {
+    return books.toSorted((a, b) => a.title.localeCompare(b.title));
+}
+
+// console.table(sortByAlphabet(books));
+
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за автором у зворотньому алфавітному порядку (від Z до A).
+
+function sortByAuthorReverseAlphabet(books) {
+    return books.toSorted((b, a) => a.author.localeCompare(b.author));
+}
+
+// console.table(sortByAuthorReverseAlphabet(books));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за жанром у алфавітному порядку, але книги одного жанру за назвою у зворотньому алфавітному порядку.
 
+function sortByGenreAlphabetAndTitleReverseAlphabet(books) {
+    return books.toSorted((a, b) => {
+        const genreSort = a.genre.localeCompare(b.genre);
+
+        if (genreSort !== 0) {
+            return genreSort;
+        }
+
+        return b.title.localeCompare(a.title);
+    });
+}
+
+// console.table(sortByGenreAlphabetAndTitleReverseAlphabet(books));
+
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за назвою у алфавітному порядку, але книги з однаковою назвою за автором у зворотньому алфавітному порядку.
+
+function sortByTitleAlphabetAndAuthorReverseAlphabet(books) {
+    return books.toSorted((a, b) => {
+        const titleSort = a.title.localeCompare(b.title);
+
+        if (titleSort !== 0) {
+            return titleSort;
+        }
+
+        return (a, b) => b.author.localeCompare(a.author);
+    });
+}
+
+// console.table(sortByTitleAlphabetAndAuthorReverseAlphabet(books));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за ціною, але спочатку розташувати ті, які коштують менше 10 доларів, потім решту.
 
+function sortByPriceFromSmall(books, userPrice) {
+    return books.toSorted((a, b) => {
+        if (a.price < userPrice && b.price >= userPrice) return -1;
+        if (a.price >= userPrice && b.price < userPrice) return 1;
+
+        return a.price - b.price;
+    });
+}
+
+// console.table(sortByPriceFromSmall(books, 10));
+
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги за рейтингом, але спочатку розташувати ті, які мають рейтинг 4.8 і вище, потім решту.
+
+function sortByRatingFromBigger(books, userRating) {
+    return books.toSorted((a, b) => {
+        if (a.rating >= userRating && b.rating < userRating) return -1;
+        if (a.rating < userRating && b.rating >= userRating) return 1;
+
+        return b.rating - a.rating;
+    });
+}
+
+// console.table(sortByRatingFromBigger(books, 4.8));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати книги спочатку за жанром, а потім за роком видання.
 
-// ========================================================================
+function sotyByGenreAndYear(books) {
+    return books.toSorted((a, b) => {
+        const genreSort = a.genre.localeCompare(b.genre);
+
+        if (genreSort !== 0) {
+            return genreSort;
+        }
+
+        return a.year - b.year;
+    });
+}
+
+// console.table(sotyByGenreAndYear(books));
+
+//!==================================================================================
 
 // Отримати всі книги, видані після 2000 року та відсортувати їх за рейтингом від найвищого до найнижчого, повернути лише назви.
 
