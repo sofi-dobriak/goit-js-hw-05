@@ -1087,36 +1087,133 @@ function sotyByGenreAndYear(books) {
 
 //!==================================================================================
 
-// Отримати всі книги, видані після 2000 року та відсортувати їх за рейтингом від найвищого до найнижчого, повернути лише назви.
+// Отримати всі книги, видані після 1950 року та відсортувати їх за рейтингом від найвищого до найнижчого, повернути лише назви.
+
+function getTitleAfterYearByRating(books, userYear) {
+    return books
+        .filter(book => book.year > userYear)
+        .toSorted((b, a) => b.rating - a.rating)
+        .map(book => book.title);
+}
+
+// console.table(getTitleAfterYearByRating(books, 1950));
 
 //------------------------------------------------------------------------------------
 
-// Отримати всі книги, автором яких є 'Fyodor Dostoevsky', відсортувати їх за роком видання від найдавнішого до найновішого та вивести перші 5 книг.
+// Отримати всі книги, автором яких є 'Harper Lee', відсортувати їх за роком видання від найдавнішого до найновішого та вивести перші 5 книг.
 
+function getBookAuthorByYear(books, userAuthor, amountBook) {
+    return books
+        .filter(book => book.author === userAuthor)
+        .toSorted((a, b) => a.year - b.year)
+        .slice(0, amountBook + 1)
+        .map(book => book);
+}
+
+// console.table(getBookAuthorByYear(books, 'Harper Lee', 5));
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги з ціною меншою ніж 10 доларів, відсортувати їх за ціною від найнижчої до найвищої та вивести назви книг.
+
+function getTitleBookByPrice(books, userPrice) {
+    return books
+        .filter(book => book.price < userPrice)
+        .toSorted((a, b) => a.price - b.price)
+        .map(book => book.title);
+}
+
+// console.table(getTitleBookByPrice(books, 10));
 
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги з рейтингом 4.8 і вище, відсортувати їх за автором у зворотньому алфавітному порядку та вивести авторів унікальних книг.
 
+function getUniqueAuthorByRating(books, userRating) {
+    const result = [];
+
+    books
+        .filter(book => book.rating >= userRating)
+        .toSorted((a, b) => b.author.localeCompare(a.author))
+        .forEach(book => {
+            if (!result.includes(book.author)) {
+                result.push(book.author);
+            }
+        });
+
+    return result;
+}
+
+// console.table(getUniqueAuthorByRating(books, 4.8));
+
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги жанру 'Romance' з ціною меншою ніж 8 доларів та відсортувати їх за рейтингом від найвищого до найнижчого.
+
+function getBookByGenreAndPrice(books, userGenre, userPrice) {
+    return books
+        .filter(book => {
+            const genre = book.genre === userGenre;
+            const price = book.price < userPrice;
+
+            return genre && price;
+        })
+        .toSorted((a, b) => b.rating - a.rating);
+}
+
+// console.table(getBookByGenreAndPrice(books, 'Romance', 8));
 
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги, видані до 1900 року, відсортувати їх за рейтингом від найвищого до найнижчого та вивести першу книгу.
 
+function getBookByBeforeYearAndSortByRating(books, userYear) {
+    return books
+        .filter(book => book.year < userYear)
+        .toSorted((a, b) => b.rating - a.ratign)
+        .shift();
+}
+
+// console.table(getBookByBeforeYearAndSortByRating(books, 1900));
+
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги, що містять слово 'and' у назві, відсортувати їх за роком видання від найдавнішого до найновішого та вивести останню книгу.
+
+function getBookByWordAndSortByYear(books, userWord) {
+    return books
+        .filter(book => book.title.includes(userWord))
+        .toSorted((a, b) => a.year - b.year)
+        .pop();
+}
+
+// console.table(getBookByWordAndSortByYear(books, 'and'));
 
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги, автором яких є 'J.R.R. Tolkien', відсортувати їх за рейтингом від найвищого до найнижчого та вивести середній рейтинг.
 
+function getAvRaintingByAuthor(books, userAuthor) {
+    const sortedBooks = books
+        .filter(book => book.author === userAuthor)
+        .toSorted((b, a) => a.ratign - b.ratign);
+
+    const totalRating = sortedBooks.reduce((acc, book) => acc + book.rating, 0);
+    const averageRating = totalRating / sortedBooks.length;
+
+    return averageRating;
+}
+
+// console.table(getAvRaintingByAuthor(books, 'J.R.R. Tolkien'));
+
 //------------------------------------------------------------------------------------
 
 // Отримати всі книги жанру 'Historical' з рейтингом вище 4.7, відсортувати їх за роком видання від найдавнішого до найновішого та вивести останні 3 книги.
+
+function getLastBooksByGenreAndRating(books, userGenre, userRating) {
+    return books
+        .filter(book => book.genre === userGenre && book.rating >= userRating)
+        .toSorted((a, b) => a.year - b.year)
+        .slice(-3);
+}
+
+console.table(getLastBooksByGenreAndRating(books, 'Historical', 4.7));
