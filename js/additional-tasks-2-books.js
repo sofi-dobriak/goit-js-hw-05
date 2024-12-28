@@ -1216,4 +1216,4 @@ function getLastBooksByGenreAndRating(books, userGenre, userRating) {
         .slice(-3);
 }
 
-console.table(getLastBooksByGenreAndRating(books, 'Historical', 4.7));
+// console.table(getLastBooksByGenreAndRating(books, 'Historical', 4.7));
