@@ -679,10 +679,11 @@ function getAvailableModel(cars) {
 // Знайти першу машину, яка не є спортивною та має кількість на складі більше 0, потім повернути її колір.
 
 function getColorFirstAvailableNotSportCar(cars) {
-    return cars.find(car => car.amount >= 1 && !car.isSportCar);
+    const car = cars.find(car => car.amount >= 1 && !car.isSportCar);
+    return car ? car.color : null;
 }
 
-// console.table(getColorFirstAvailableNotSportCar(cars));
+// console.log(getColorFirstAvailableNotSportCar(cars));
 
 //------------------------------------------------------------------------------------
 

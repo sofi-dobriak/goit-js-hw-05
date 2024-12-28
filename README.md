@@ -1,1 +1,2 @@
-The fifth homework of the JavaScript module of the FullStack Developer course
+The fifth homework from the JavaScript module of the FullStack Developer course + solutions for
+additional tasks from the teacher
