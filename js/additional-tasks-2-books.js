@@ -1058,10 +1058,10 @@ function sortByPriceFromSmall(books, userPrice) {
 
 function sortByRatingFromBigger(books, userRating) {
     return books.toSorted((a, b) => {
-        if (a.rating >= userRating && b.rating < userRating) return -1;
-        if (a.rating < userRating && b.rating >= userRating) return 1;
+        if (a.rating >= userRating && b.rating < userRating) return -1; //відсортувати першу підгрупу
+        if (a.rating < userRating && b.rating >= userRating) return 1; //відсортувати другу підгрупу
 
-        return b.rating - a.rating;
+        return b.rating - a.rating; // підгрупи відносно одна одної
     });
 }
 

@@ -301,94 +301,226 @@ const users = [
 
 // Знайти користувачів віком від 25 до 40 років.
 
+function getUserByRangeAge(users, minAge, maxAge) {
+    return users.filter(user => user.age >= minAge && user.age <= maxAge);
+}
+
+// console.table(getUserByRangeAge(users, 25, 40));
+
 //------------------------------------------------------------------------------------
 
 // Знайти всіх користувачів із активним статусом.
+
+function getAllActiveUser(users) {
+    return users.filter(user => user.isActive);
+}
+
+// console.table(getAllActiveUser(users));
 
 //------------------------------------------------------------------------------------
 
 // Порахувати кількість користувачів молодше 30 років.
 
+function getTotalCountsUserByAfeLessThan(users, userAge) {
+    return users.filter(user => user.age < userAge).length;
+}
+
+// console.log(getTotalCountsUserByAfeLessThan(users, 30));
+
 //------------------------------------------------------------------------------------
 
 // Відсортувати користувачів віком від старшого до молодшого.
 
+function sortUserByAgeFromOlders(users) {
+    return users.toSorted((b, a) => a.age - b.age);
+}
+
+// console.table(sortUserByAgeFromOlders(users));
+
 //------------------------------------------------------------------------------------
 
 // Знайти користувачів з електронною поштою на домені gmail.com.
+// Знайти всіх користувачів електронної пошти на домені yahoo.com.
+
+function getAllUsersByImail(users, userDomen) {
+    return users.filter(user => user.email.includes(userDomen));
+}
+
+// console.table(getAllUsersByImail(users, 'gmail.com'));
+// console.table(getAllUsersByImail(users, 'yahoo.com'));
 
 //------------------------------------------------------------------------------------
 
 // Знайти всіх жінок серед користувачів.
 
+function getUserByGender(users, userGender) {
+    return users.filter(user => user.gender === userGender);
+}
+
+// console.table(getUserByGender(users, 'Female'));
+
 //------------------------------------------------------------------------------------
 
 // Порахувати кількість неактивних користувачів.
+
+function getTotalCountOfflineUsers(users) {
+    return users.filter(user => !user.isActive).length;
+}
+
+// console.table(getTotalCountOfflineUsers(users));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати користувачів на прізвище в алфавітному порядку.
 
+function sortUserByLastNameAlphabet(users) {
+    return users.toSorted((a, b) => a.lastName.localeCompare(b.lastName));
+}
+
+// console.table(sortUserByLastNameAlphabet(users));
+
 //------------------------------------------------------------------------------------
 
 // Знайти користувача з найбільшим віком.
+
+function getOlderUser(users) {
+    return users.toSorted((b, a) => a.age - b.age)[0];
+}
+
+// console.table(getOlderUser(users));
 
 //------------------------------------------------------------------------------------
 
 // Перевірити, чи є хоча б один користувач із прізвищем "Johnson".
 
+function checkUserByLastName(users, userLastName) {
+    return users.some(user => user.lastName === userLastName);
+}
+
+// console.log(checkUserByLastName(users, 'Johnson'));
+
 //------------------------------------------------------------------------------------
 
 // Створити новий масив, який містить лише імена користувачів.
+
+function getNameUsers(users) {
+    return users.map(user => user.firstName);
+}
+
+// console.table(getNameUsers(users));
 
 //------------------------------------------------------------------------------------
 
 // Створити масив з інформацією про користувачів у форматі JSON.
 
+function getInformInJSSON(users) {
+    return JSON.stringify(users, null, 2);
+}
+
+// console.log(getInformInJSSON(users));
+
 //------------------------------------------------------------------------------------
 
 // Знайти індекс першого користувача під назвою "Jane".
+
+function getIndexFirstUserByName(users, userName) {
+    return users.findIndex(user => user.firstName === userName);
+}
+
+// console.table(getIndexFirstUserByName(users, 'Jane'));
 
 //------------------------------------------------------------------------------------
 
 // Знайти всіх користувачів чоловічої статі віком від 30 до 50 років.
 
+function getUserByGenderAndRangeAge(users, userGender, minAge, maxAge) {
+    return users.filter(user => {
+        const gender = user.gender === userGender;
+        const minimalAge = user.age >= minAge;
+        const maximalAge = user.age <= maxAge;
+
+        return gender && minimalAge && maximalAge;
+    });
+}
+
+// console.table(getUserByGenderAndRangeAge(users, 'Male', 30, 50));
+
 //------------------------------------------------------------------------------------
 
 // Порахувати загальну кількість користувачів.
+
+function getTotalCountUsers(users) {
+    return users.length;
+}
+
+// console.log(getTotalCountUsers(users));
 
 //------------------------------------------------------------------------------------
 
 // Знайти всіх користувачів з активним статусом та віком старше 25 років.
 
+function getActiveUserByAgeMoreThan(users, userAge) {
+    return users.filter(user => user.isActive && user.age > userAge);
+}
+
+// console.table(getActiveUserByAgeMoreThan(users, 25));
+
 //------------------------------------------------------------------------------------
 
 // Знайти користувачів із прізвищем, що починається на букву "S".
+
+function getUserByFirstLetterName(users, firstLetter) {
+    return users.filter(user => user.firstName[0] === firstLetter);
+}
+
+// console.table(getUserByFirstLetterName(users, 'S'));
 
 //------------------------------------------------------------------------------------
 
 // Відсортувати користувачів за віком (від молодшого до старшого).
 
-//------------------------------------------------------------------------------------
+function sortUserByAgeFromYounger(users) {
+    return users.toSorted((a, b) => a.age - b.age);
+}
 
-// Знайти всіх користувачів електронної пошти на домені yahoo.com.
+// console.table(sortUserByAgeFromYounger(users));
 
 //------------------------------------------------------------------------------------
 
 // Знайти користувача з найменшим віком.
 
+function findFistYoungerUser(users) {
+    return users.toSorted((a, b) => a.age - b.age)[0];
+}
+
+// console.table(findFistYoungerUser(users));
+
 //------------------------------------------------------------------------------------
 
 // Перевірити, чи є хоча б один користувач з ім'ям John.
+
+function checkUserByFirstName(users, userFirstName) {
+    return users.some(user => user.firstName === userFirstName);
+}
+
+// console.table(checkUserByFirstName(users, 'John'));
 
 //------------------------------------------------------------------------------------
 
 // Створити новий масив, що містить лише прізвища користувачів.
 
-//------------------------------------------------------------------------------------
+function getLastNameUsers(users) {
+    return users.map(user => user.lastName);
+}
 
-// Створити масив з інформацією про користувачів як рядкових описів.
+// console.table(getLastNameUsers(users));
 
 //------------------------------------------------------------------------------------
 
 // Знайти індекс користувача з активним статусом і віком більшим або рівним 40 років.
+
+function getIndexFirstActiveUserByAgeMoreThan(users, userAge) {
+    return users.findIndex(user => user.isActive && user.age >= userAge);
+}
+
+// console.table(getIndexFirstActiveUserByAgeMoreThan(users, 40));
